@@ -14,7 +14,7 @@
         android:layout_marginEnd="99dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/button_rounded"
-        android:text="Iniciar sesion"
+        android:text="@string/iniciar_sesion"
         app:layout_constraintBottom_toTopOf="@+id/button_registrarse"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -25,7 +25,7 @@
         android:layout_marginEnd="96dp"
         android:layout_marginBottom="272dp"
         android:background="@drawable/button_rounded"
-        android:text="Registrarse"
+        android:text="@string/registrarse"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
