@@ -42,6 +42,13 @@ public class Login extends AppCompatActivity {
                 IniciarSesion(mail,pass);
             }
         });*/
+        /*btnRegistrar.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent ventingRegistry = new Intent(this, VentanRegistro.class);
+                startActivity(ventingRegistry);
+            }
+        });*/
     }
 
     /*public void IniciarSesion(String mail, String password){

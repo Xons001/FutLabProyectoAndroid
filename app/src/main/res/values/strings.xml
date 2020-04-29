@@ -3,4 +3,10 @@
     <string name="entro_en_admin">Entro en admin</string>
     <string name="iniciar_sesion">Iniciar sesion</string>
     <string name="registrarse">Registrarse</string>
+    <string name="nombre_cliente">Introduce tu nombre...</string>
+    <string name="apellidos_cliente">Introduce tus apellidos...</string>
+    <string name="mail_cliente">Introduce tu email ...</string>
+    <string name="cliente_password">introduce un password  ...</string>
+    <string name="confirmar_registro">Confirmar Registro</string>
+    <string name="volver_atras">Volver</string>
 </resources>
