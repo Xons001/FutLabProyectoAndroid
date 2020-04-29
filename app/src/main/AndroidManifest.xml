@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity android:name=".Ventanas.VentanaCliente"></activity>
         <activity android:name=".Ventanas.VentanaAdmin" />
         <activity android:name=".Ventanas.Login">

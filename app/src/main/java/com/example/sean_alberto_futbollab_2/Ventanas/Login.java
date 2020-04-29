@@ -29,22 +29,22 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-        btnLogin.findViewById(R.id.button_login);
-        btnRegistrar.findViewById(R.id.button_registrarse);
-        txtCorreo.findViewById(R.id.email_field);
-        txtPassword.findViewById(R.id.password_field);
+        btnLogin = findViewById(R.id.button_login);
+        btnRegistrar = findViewById(R.id.button_registrarse);
+        txtCorreo = findViewById(R.id.email_field);
+        txtPassword = findViewById(R.id.password_field);
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+        /*btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String mail = txtCorreo.getText().toString();
                 String pass = txtPassword.getText().toString();
                 IniciarSesion(mail,pass);
             }
-        });
+        });*/
     }
 
-    public void IniciarSesion(String mail, String password){
+    /*public void IniciarSesion(String mail, String password){
         ConexionPostgresSQL con = null;
         boolean encontroUser = false;
         try {
@@ -90,5 +90,5 @@ public class Login extends AppCompatActivity {
         } catch (Exception e){
             e.printStackTrace();
         }
-    }
+    }*/
 }
