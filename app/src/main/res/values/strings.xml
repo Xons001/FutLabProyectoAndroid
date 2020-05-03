@@ -9,4 +9,7 @@
     <string name="cliente_password">introduce un password  ...</string>
     <string name="confirmar_registro">Confirmar Registro</string>
     <string name="volver_atras">Volver</string>
+    <string name="correo_electronico">Correo electronico</string>
+    <string name="password">Password</string>
+    <string name="imagen_logo">Imagen Logo</string>
 </resources>

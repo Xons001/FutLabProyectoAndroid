@@ -13,7 +13,6 @@
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity android:name=".Ventanas.VentanRegistro"></activity>
         <activity android:name=".Ventanas.VentanaCliente" />
-        <activity android:name=".Ventanas.VentanaAdmin" />
         <activity android:name=".Ventanas.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

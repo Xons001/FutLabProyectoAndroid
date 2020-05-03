@@ -3,7 +3,9 @@ package com.example.sean_alberto_futbollab_2.Ventanas;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,16 +15,21 @@ import com.example.sean_alberto_futbollab_2.Conexion.ConexionPostgresSQL;
 import com.example.sean_alberto_futbollab_2.Objetos.Cliente;
 import com.example.sean_alberto_futbollab_2.R;
 
-import java.sql.ResultSet;
-import java.sql.Statement;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class Login extends AppCompatActivity {
 
     ConexionPostgresSQL con = new ConexionPostgresSQL();
     static Cliente clienteLogin;
+    private String TAG = Login.class.getSimpleName();
+    private boolean loginExiste = false;
 
     Button btnLogin, btnRegistrar;
     EditText txtCorreo, txtPassword;
+
+    static String URL_login = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,68 +41,94 @@ public class Login extends AppCompatActivity {
         txtCorreo = findViewById(R.id.email_field);
         txtPassword = findViewById(R.id.password_field);
 
-        /*btnLogin.setOnClickListener(new View.OnClickListener() {
+        btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String mail = txtCorreo.getText().toString();
                 String pass = txtPassword.getText().toString();
-                IniciarSesion(mail,pass);
-            }
-        });*/
-        /*btnRegistrar.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                Intent ventingRegistry = new Intent(this, VentanRegistro.class);
-                startActivity(ventingRegistry);
-            }
-        });*/
-    }
+                URL_login = getURL_login(mail, pass);
+                new IniciarSesion().execute();
 
-    /*public void IniciarSesion(String mail, String password){
-        ConexionPostgresSQL con = null;
-        boolean encontroUser = false;
-        try {
-            String sql = "SELECT * FROM cliente";
-            Statement stmt = con.conexionDB().createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-
-            while(rs.next()) {
-                if (rs.getString("mail").equals(mail) && rs.getString("password").equals(password)) {
-                    if (rs.getString("mail").equals("admin")){
-                        Intent ventanaAdmin = new Intent(this, VentanaAdmin.class);
-                        startActivity(ventanaAdmin);
-                        encontroUser = true;
-
-                        //Guardamos los datos del cliente en un objeto global para poder acceder a los datos de este en cualquier ventana
-                        clienteLogin.setCliente_id(rs.getInt("cliente_id"));
-                        clienteLogin.setNombre(rs.getString("nombre"));
-                        clienteLogin.setApellidos(rs.getString("apellidos"));
-                        clienteLogin.setMail(rs.getString("mail"));
-
-                        Toast.makeText(getApplicationContext(), "Entraste con admin", Toast.LENGTH_SHORT);
-                        break;
-                    } else {
-                        Intent ventanaCliente = new Intent(this, VentanaCliente.class);
-                        startActivity(ventanaCliente);
-                        encontroUser = true;
-
-                        //Guardamos los datos del cliente en un objeto global para poder acceder a los datos de este en cualquier ventana
-                        clienteLogin.setCliente_id(rs.getInt("cliente_id"));
-                        clienteLogin.setNombre(rs.getString("nombre"));
-                        clienteLogin.setApellidos(rs.getString("apellidos"));
-                        clienteLogin.setMail(rs.getString("mail"));
-
-                        Toast.makeText(getApplicationContext(), "Bienvenido" + clienteLogin.getNombre(), Toast.LENGTH_SHORT);
-                        break;
-                    }
+                if (loginExiste == true) {
+                    Intent intentCliente = new Intent(getApplicationContext(), VentanaCliente.class);
+                    startActivity(intentCliente);
+                    Toast.makeText(Login.this, "Sesion iniciada", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(Login.this, "Correo o password invalidos", Toast.LENGTH_SHORT).show();
                 }
             }
-            if (encontroUser == false){
-                Toast.makeText(getApplicationContext(), "Correo o password incorrecto", Toast.LENGTH_SHORT);
+        });
+
+
+
+        btnRegistrar.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent ventingRegistry = new Intent(getApplicationContext(), VentanRegistro.class);
+                startActivity(ventingRegistry);
+            }
+        });
+    }
+
+    public static String getURL_login(String mail, String password) {
+        String url = "https://futlab-credito-sintesis.herokuapp.com/login/" + mail + "/" + password;
+        return url;
+    }
+
+    private class IniciarSesion extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... Voids) {
+            ConexionPostgresSQL conn = new ConexionPostgresSQL();
+            // Making a request to url and getting response
+            String jsonStr = conn.makeServiceCall(URL_login);
+            Log.e(TAG, "Response from url: " + jsonStr);
+            if (jsonStr != null) {
+                try {
+                    JSONObject jsonObj = new JSONObject(jsonStr);
+                    // Getting JSON Array node
+                    JSONArray clienteJS = jsonObj.getJSONArray("clientes");
+                    // looping through All Courses
+                    for (int i = 0; i < clienteJS.length(); i++) {
+                        JSONObject c = clienteJS.getJSONObject(i);
+                        int cliente_id = Integer.parseInt(c.getString("cliente_id"));
+                        String nombre_text = c.getString("nombre");
+                        String apellido_text = c.getString("apellidos");
+                        String mail_text = c.getString("mail");
+
+                        clienteLogin.setCliente_id(cliente_id);
+                        clienteLogin.setNombre(nombre_text);
+                        clienteLogin.setApellidos(apellido_text);
+                        clienteLogin.setMail(mail_text);
+                        Log.e(TAG, "Correo del login: " + clienteLogin.getMail());
+                        loginExiste = true;
+                    }
+                } catch (final JSONException e) {
+                    Log.e(TAG, "Json parsing error 1: " + e.getMessage());
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getApplicationContext(),
+                                    "Json parsing error 2: " + e.getMessage(),
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+                }
+            } else {
+                Log.e(TAG, "Couldn't get json from server.");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(),
+                                "Couldn't get json from server. Check LogCat for possible errors!",
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
             }
 
-        } catch (Exception e){
-            e.printStackTrace();
+            return null;
         }
-    }*/
+
+    }
 }
