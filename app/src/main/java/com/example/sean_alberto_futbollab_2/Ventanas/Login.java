@@ -41,7 +41,7 @@ public class Login extends AppCompatActivity {
         txtCorreo = findViewById(R.id.email_field);
         txtPassword = findViewById(R.id.password_field);
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+        /*btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String mail = txtCorreo.getText().toString();
@@ -57,15 +57,15 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(Login.this, "Correo o password invalidos", Toast.LENGTH_SHORT).show();
                 }
             }
-        });
+        });*/
 
 
 
         btnRegistrar.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent ventingRegistry = new Intent(getApplicationContext(), VentanRegistro.class);
-                startActivity(ventingRegistry);
+                Intent ventanaRegistro = new Intent(getApplicationContext(), VentanRegistro.class);
+                startActivity(ventanaRegistro);
             }
         });
     }
@@ -101,8 +101,8 @@ public class Login extends AppCompatActivity {
                         clienteLogin.setApellidos(apellido_text);
                         clienteLogin.setMail(mail_text);
                         Log.e(TAG, "Correo del login: " + clienteLogin.getMail());
-                        loginExiste = true;
                     }
+                    loginExiste = true;
                 } catch (final JSONException e) {
                     Log.e(TAG, "Json parsing error 1: " + e.getMessage());
                     runOnUiThread(new Runnable() {
