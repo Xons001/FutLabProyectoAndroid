@@ -41,7 +41,7 @@ public class Login extends AppCompatActivity {
         txtCorreo = findViewById(R.id.email_field);
         txtPassword = findViewById(R.id.password_field);
 
-        /*btnLogin.setOnClickListener(new View.OnClickListener() {
+        btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String mail = txtCorreo.getText().toString();
@@ -49,15 +49,9 @@ public class Login extends AppCompatActivity {
                 URL_login = getURL_login(mail, pass);
                 new IniciarSesion().execute();
 
-                if (loginExiste == true) {
-                    Intent intentCliente = new Intent(getApplicationContext(), VentanaCliente.class);
-                    startActivity(intentCliente);
-                    Toast.makeText(Login.this, "Sesion iniciada", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(Login.this, "Correo o password invalidos", Toast.LENGTH_SHORT).show();
-                }
+
             }
-        });*/
+        });
 
 
 
@@ -84,7 +78,9 @@ public class Login extends AppCompatActivity {
             String jsonStr = conn.makeServiceCall(URL_login);
             Log.e(TAG, "Response from url: " + jsonStr);
             if (jsonStr != null) {
-                try {
+                Log.e(TAG, "Ha entrado en el json.");
+                /*try {
+                    Log.e(TAG, "Ha entrado en el try.");
                     JSONObject jsonObj = new JSONObject(jsonStr);
                     // Getting JSON Array node
                     JSONArray clienteJS = jsonObj.getJSONArray("clientes");
@@ -102,7 +98,6 @@ public class Login extends AppCompatActivity {
                         clienteLogin.setMail(mail_text);
                         Log.e(TAG, "Correo del login: " + clienteLogin.getMail());
                     }
-                    loginExiste = true;
                 } catch (final JSONException e) {
                     Log.e(TAG, "Json parsing error 1: " + e.getMessage());
                     runOnUiThread(new Runnable() {
@@ -114,7 +109,8 @@ public class Login extends AppCompatActivity {
                         }
                     });
 
-                }
+                }*/
+                loginExiste = true;
             } else {
                 Log.e(TAG, "Couldn't get json from server.");
                 runOnUiThread(new Runnable() {
@@ -130,5 +126,15 @@ public class Login extends AppCompatActivity {
             return null;
         }
 
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            if (loginExiste == true) {
+                Intent intentCliente = new Intent(getApplicationContext(), VentanaCliente.class);
+                startActivity(intentCliente);
+                Toast.makeText(Login.this, "Sesion iniciada", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(Login.this, "Correo o password invalidos", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }
