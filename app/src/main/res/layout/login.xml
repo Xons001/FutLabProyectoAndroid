@@ -81,4 +81,23 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo_futbollab_final" />
 
+    <com.synnapps.carouselview.CarouselView
+        android:id="@+id/carouselView"
+        android:layout_width="363dp"
+        android:layout_height="180dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="459dp"
+        android:layout_marginEnd="10dp"
+        app:fillColor="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.767"
+        app:pageColor="@color/colorWhite"
+        app:radius="6dp"
+        app:slideInterval="3000"
+        app:strokeColor="@color/colorGrey"
+        app:strokeWidth="1dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

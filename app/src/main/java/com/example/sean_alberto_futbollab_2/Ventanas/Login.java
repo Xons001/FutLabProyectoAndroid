@@ -9,11 +9,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.sean_alberto_futbollab_2.Conexion.ConexionPostgresSQL;
 import com.example.sean_alberto_futbollab_2.Objetos.Cliente;
 import com.example.sean_alberto_futbollab_2.R;
+import com.synnapps.carouselview.CarouselView;
+import com.synnapps.carouselview.ImageListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,6 +33,10 @@ public class Login extends AppCompatActivity {
     EditText txtCorreo, txtPassword;
 
     static String URL_login = null;
+
+    private CarouselView carouselView;
+
+    private int[] Imagenes={R.drawable.masteren_preparacion_fisica1, R.drawable.grado_medio2, R.drawable.grado_superior3, R.drawable.pasantia_entrenador4, R.drawable.pasantia_jugador5, R.drawable.maste_en_entrenador_de_porteros_de_futbol6, R.drawable.master_en_profesional_del_futbol7};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +60,6 @@ public class Login extends AppCompatActivity {
             }
         });
 
-
-
         btnRegistrar.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -62,6 +67,18 @@ public class Login extends AppCompatActivity {
                 startActivity(ventanaRegistro);
             }
         });
+
+        carouselView = findViewById(R.id.carouselView);
+        carouselView.setPageCount(Imagenes.length);
+
+        ImageListener imageListener = new ImageListener(){
+            @Override
+            public void setImageForPosition(int position, ImageView imageView) {
+                imageView.setImageResource(Imagenes[position]);
+            }
+        };
+        carouselView.setImageListener(imageListener);
+
     }
 
     public static String getURL_login(String mail, String password) {
