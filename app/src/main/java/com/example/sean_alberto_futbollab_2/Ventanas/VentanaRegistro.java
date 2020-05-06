@@ -18,7 +18,7 @@ import java.io.DataOutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class VentanRegistro extends AppCompatActivity {
+public class VentanaRegistro extends AppCompatActivity {
 
     Button btnRegistrar, btnVolver;
     EditText nombreRegistro, apellidoRegistro, mailRegistro, passwordRegistro;
@@ -26,7 +26,7 @@ public class VentanRegistro extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.ventan_registro);
+        setContentView(R.layout.ventana_registro);
 
         btnRegistrar = findViewById(R.id.button_registrarse);
         btnVolver = findViewById(R.id.boton_volver_atras);
@@ -44,12 +44,12 @@ public class VentanRegistro extends AppCompatActivity {
             }
         });
 
-        btnRegistrar.setOnClickListener(new View.OnClickListener() {
+        /*btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 sendDatosClientes();
             }
-        });
+        });*/
     }
 
     public void sendDatosClientes() {
@@ -84,12 +84,12 @@ public class VentanRegistro extends AppCompatActivity {
                     Intent intentLogin = new Intent(getApplicationContext(), Login.class);
                     startActivity(intentLogin);
 
-                    Toast.makeText(VentanRegistro.this, "Cliente registrado", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(VentanaRegistro.this, "Cliente registrado", Toast.LENGTH_SHORT).show();
 
                     conn.disconnect();
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(VentanRegistro.this, "El cliente no se has podido registrar", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(VentanaRegistro.this, "El cliente no se has podido registrar", Toast.LENGTH_SHORT).show();
                 }
             }
         });

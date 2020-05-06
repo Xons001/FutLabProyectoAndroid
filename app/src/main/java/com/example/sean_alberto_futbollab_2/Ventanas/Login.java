@@ -18,10 +18,6 @@ import com.example.sean_alberto_futbollab_2.R;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 public class Login extends AppCompatActivity {
 
     ConexionPostgresSQL con = new ConexionPostgresSQL();
@@ -63,7 +59,7 @@ public class Login extends AppCompatActivity {
         btnRegistrar.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent ventanaRegistro = new Intent(getApplicationContext(), VentanRegistro.class);
+                Intent ventanaRegistro = new Intent(getApplicationContext(), VentanaRegistro.class);
                 startActivity(ventanaRegistro);
             }
         });
