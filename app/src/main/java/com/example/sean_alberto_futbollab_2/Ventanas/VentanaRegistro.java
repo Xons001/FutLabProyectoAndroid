@@ -23,6 +23,8 @@ public class VentanaRegistro extends AppCompatActivity {
     Button btnRegistrar, btnVolver;
     EditText nombreRegistro, apellidoRegistro, mailRegistro, passwordRegistro;
 
+    String urlStr;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,17 +49,27 @@ public class VentanaRegistro extends AppCompatActivity {
         /*btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String nombre = nombreRegistro.getText().toString();
+                String apellidos = apellidoRegistro.getText().toString();
+                String mail = mailRegistro.getText().toString();
+                String pass = passwordRegistro.getText().toString();
+                urlStr = getURL_Registrar(nombre, apellidos, mail, pass);
+
                 sendDatosClientes();
             }
         });*/
     }
 
+    public static String getURL_Registrar(String nombre, String apellidos, String mail, String password) {
+        String url = "https://futlab-credito-sintesis.herokuapp.com/registar/" + nombre + "/" + apellidos + "/" + mail + "/" + password;
+        return url;
+    }
     public void sendDatosClientes() {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    URL url = new URL("https://futlab-credito-sintesis.herokuapp.com/registrar");
+                    URL url = new URL(urlStr);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestMethod("POST");
                     conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
