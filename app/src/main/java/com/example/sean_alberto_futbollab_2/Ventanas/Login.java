@@ -18,12 +18,15 @@ import com.example.sean_alberto_futbollab_2.R;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Login extends AppCompatActivity {
 
     ConexionPostgresSQL con = new ConexionPostgresSQL();
     static Cliente clienteLogin;
     private String TAG = Login.class.getSimpleName();
-    private boolean loginExiste = false;
 
     Button btnLogin, btnRegistrar;
     EditText txtCorreo, txtPassword;
@@ -51,8 +54,6 @@ public class Login extends AppCompatActivity {
                 String pass = txtPassword.getText().toString();
                 URL_login = getURL_login(mail, pass);
                 new IniciarSesion().execute();
-
-
             }
         });
 
@@ -83,7 +84,7 @@ public class Login extends AppCompatActivity {
     }
 
     private class IniciarSesion extends AsyncTask<Void, Void, Void> {
-
+        boolean loginExiste = false;
         @Override
         protected Void doInBackground(Void... Voids) {
             ConexionPostgresSQL conn = new ConexionPostgresSQL();
@@ -91,12 +92,13 @@ public class Login extends AppCompatActivity {
             String jsonStr = conn.makeServiceCall(URL_login);
             Log.e(TAG, "Response from url: " + jsonStr);
             if (jsonStr != null) {
-                Log.e(TAG, "Ha entrado en el json.");
-                /*try {
+                Log.e(TAG, "Ha entrado en el if.");
+                try {
                     Log.e(TAG, "Ha entrado en el try.");
                     JSONObject jsonObj = new JSONObject(jsonStr);
                     // Getting JSON Array node
                     JSONArray clienteJS = jsonObj.getJSONArray("clientes");
+                    clienteLogin = new Cliente();
                     // looping through All Courses
                     for (int i = 0; i < clienteJS.length(); i++) {
                         JSONObject c = clienteJS.getJSONObject(i);
@@ -109,6 +111,7 @@ public class Login extends AppCompatActivity {
                         clienteLogin.setNombre(nombre_text);
                         clienteLogin.setApellidos(apellido_text);
                         clienteLogin.setMail(mail_text);
+                        loginExiste = true;
                         Log.e(TAG, "Correo del login: " + clienteLogin.getMail());
                     }
                 } catch (final JSONException e) {
@@ -122,8 +125,7 @@ public class Login extends AppCompatActivity {
                         }
                     });
 
-                }*/
-                loginExiste = true;
+                }
             } else {
                 Log.e(TAG, "Couldn't get json from server.");
                 runOnUiThread(new Runnable() {
