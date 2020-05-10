@@ -13,4 +13,9 @@
     <string name="password">Password</string>
     <string name="imagen_logo">Imagen Logo</string>
     <string name="todo">TODO</string>
+    <string name="cursos_disponibles">Cursos Disponibles</string>
+    <string name="cursos_comprados">Cursos Comprados</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
