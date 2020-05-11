@@ -92,9 +92,7 @@ public class Login extends AppCompatActivity {
             String jsonStr = conn.makeServiceCall(URL_login);
             Log.e(TAG, "Response from url: " + jsonStr);
             if (jsonStr != null) {
-                Log.e(TAG, "Ha entrado en el if.");
                 try {
-                    Log.e(TAG, "Ha entrado en el try.");
                     JSONObject jsonObj = new JSONObject(jsonStr);
                     // Getting JSON Array node
                     JSONArray clienteJS = jsonObj.getJSONArray("clientes");
@@ -112,7 +110,6 @@ public class Login extends AppCompatActivity {
                         clienteLogin.setApellidos(apellido_text);
                         clienteLogin.setMail(mail_text);
                         loginExiste = true;
-                        Log.e(TAG, "Correo del login: " + clienteLogin.getMail());
                     }
                 } catch (final JSONException e) {
                     Log.e(TAG, "Json parsing error 1: " + e.getMessage());
