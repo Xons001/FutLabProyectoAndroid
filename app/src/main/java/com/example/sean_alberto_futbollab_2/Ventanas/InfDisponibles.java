@@ -26,6 +26,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 import static com.example.sean_alberto_futbollab_2.Ventanas.CursosDisponibles.cursoClickado;
 
@@ -55,12 +58,14 @@ public class InfDisponibles extends AppCompatActivity {
         mostrarDescripcion = findViewById(R.id.mostrarDescCurso);
         mostrarPrecio = findViewById(R.id.mostrarPrecio);
 
-        if (cursoClickado.getMaster_id() != null) {
-            new getMaster().execute();
-            Log.e(TAG, "Ha entrado en el master");
-        } else if (cursoClickado.getGrado_id() != null) {
+        if (cursoClickado.getMaster_id().equals("null")) {
             new getGrado().execute();
+            Log.e(TAG, "Ha entrado en el master");
+        } else if (cursoClickado.getGrado_id().equals("null")) {
+            new getMaster().execute();
             Log.e(TAG, "Ha entrado en el grado");
+        } else {
+            Log.e(TAG, "No ha entrado en ninguno");
         }
 
         btnVolver.setOnClickListener(new View.OnClickListener() {
@@ -129,12 +134,15 @@ public class InfDisponibles extends AppCompatActivity {
 
                 }
 
+                DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH);
+                DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyy", Locale.ENGLISH);
+                LocalDate date = LocalDate.parse(master.getMasterFechaInicio(), inputFormatter);
+                String fechaInicioCorrecto = outputFormatter.format(date);
+
                 mostrarDescripcion.setText(master.getMasterDescripcion());
                 mostrarHoras.setText(master.getMasterHorasTotales());
-                mostrarFecha.setText(master.getMasterFechaInicio());
+                mostrarFecha.setText(fechaInicioCorrecto);
                 mostrarPrecio.setText(master.getMasterPrecio());
-
-                Toast.makeText(InfDisponibles.this, "Entrando en el master ", Toast.LENGTH_SHORT).show();
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -199,12 +207,15 @@ public class InfDisponibles extends AppCompatActivity {
 
                 }
 
+                DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH);
+                DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyy", Locale.ENGLISH);
+                LocalDate date = LocalDate.parse(grado.getGradoFechaInicio(), inputFormatter);
+                String fechaInicioCorrecto = outputFormatter.format(date);
+
                 mostrarDescripcion.setText(grado.getGradoDescripcion());
                 mostrarHoras.setText(grado.getGradoHorasTotales());
-                mostrarFecha.setText(grado.getGradoFechaInicio());
+                mostrarFecha.setText(fechaInicioCorrecto);
                 mostrarPrecio.setText(grado.getGradoPrecio());
-
-                Toast.makeText(InfDisponibles.this, "Entrando en el grado ", Toast.LENGTH_SHORT).show();
 
             } catch (JSONException e) {
                 e.printStackTrace();
