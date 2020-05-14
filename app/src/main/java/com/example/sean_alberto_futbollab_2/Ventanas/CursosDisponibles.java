@@ -1,9 +1,13 @@
 package com.example.sean_alberto_futbollab_2.Ventanas;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -23,10 +27,13 @@ import java.util.ArrayList;
 
 public class CursosDisponibles extends Activity {
 
+    private String TAG = CursosDisponibles.class.getSimpleName();
+
     ListView listView;
     ArrayList<Cursos> arrayList;
     SwipeRefreshLayout swipeRefresh;
 
+    static Cursos cursoClickado;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +43,7 @@ public class CursosDisponibles extends Activity {
         listView = findViewById(R.id.listaDisponibles);
 
         arrayList = new ArrayList<>();
+
         new getCursos().execute();
 
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -97,19 +105,37 @@ public class CursosDisponibles extends Activity {
                     String id = c.getString("curso_id");
                     String nombre = c.getString("nombre");
                     String plazas = c.getString("plazas");
+                    String grado_id = c.getString("grado_id");
+                    String master_id = c.getString("master_id");
+
 
                     Cursos curso = new Cursos();
                     curso.setCurso_id(id);
                     curso.setNombre(nombre);
                     curso.setPlazas(plazas);
+                    curso.setGrado_id(grado_id);
+                    curso.setMaster_id(master_id);
                     arrayList.add(curso);
+
                 }
+
             } catch (JSONException  e) {
                 e.printStackTrace();
             }
 
             CustomAdapter adapter = new CustomAdapter(CursosDisponibles.this, arrayList);
             listView.setAdapter(adapter);
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    Toast.makeText(CursosDisponibles.this, "Entrando en el curso ", Toast.LENGTH_SHORT).show();
+                    cursoClickado = new Cursos();
+                    cursoClickado = arrayList.get(i);
+                    Intent ventanaInfo = new Intent(getApplicationContext(), InfDisponibles.class);
+                    startActivity(ventanaInfo);
+                }
+            });
 
         }
     }

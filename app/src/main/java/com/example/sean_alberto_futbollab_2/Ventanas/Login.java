@@ -9,14 +9,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.sean_alberto_futbollab_2.Conexion.ConexionPostgresSQL;
 import com.example.sean_alberto_futbollab_2.Objetos.Cliente;
 import com.example.sean_alberto_futbollab_2.R;
-import com.synnapps.carouselview.CarouselView;
-import com.synnapps.carouselview.ImageListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;

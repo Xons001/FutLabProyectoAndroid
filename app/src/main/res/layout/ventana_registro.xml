@@ -11,13 +11,12 @@
         android:id="@+id/boton_confirmar_registro"
         android:layout_width="330dp"
         android:layout_height="75dp"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="200dp"
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="100dp"
-        android:background="@color/colorPrimary"
+        android:layout_marginEnd="200dp"
+        android:background="@drawable/button_rounded"
         android:text="@string/confirmar_registro"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password_registro" />
 
@@ -28,7 +27,7 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="100dp"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/button_rounded"
         android:text="@string/volver_atras"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
@@ -40,28 +39,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="100dp"
+        android:contentDescription="@string/todo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo_futbollab_final"
-        android:contentDescription="@string/todo" />
+        app:srcCompat="@drawable/logo_futbollab_final" />
 
     <EditText
         android:id="@+id/nombre_registro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="100dp"
+        android:autofillHints=""
         android:ems="10"
         android:hint="@string/nombre_cliente"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        android:autofillHints="" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
         android:id="@+id/apellidos_registro"
@@ -98,15 +97,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="100dp"
+        android:autofillHints=""
         android:ems="10"
         android:hint="@string/cliente_password"
         android:inputType="textPassword"
         app:layout_constraintEnd_toStartOf="@+id/boton_confirmar_registro"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mail_registro"
-        android:autofillHints="" />
+        app:layout_constraintTop_toBottomOf="@+id/mail_registro" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

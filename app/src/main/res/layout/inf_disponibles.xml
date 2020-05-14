@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#009688"
+    tools:context=".Ventanas.InfDisponibles">
+
+    <TextView
+        android:id="@+id/infCurso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="100dp"
+        android:text="@string/informacion_curso"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtNombreCurso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="70dp"
+        android:text="@string/nombre_curso"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/infCurso" />
+
+    <TextView
+        android:id="@+id/txtHoras"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/horas_totales"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtNombreCurso" />
+
+    <TextView
+        android:id="@+id/txtFechaInicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/fecha_de_inicio"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtHoras" />
+
+    <TextView
+        android:id="@+id/txtDescCurso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/descripcion_del_curso"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtFechaInicio" />
+
+    <TextView
+        android:id="@+id/txtPlazasDisp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/plazas_disponibles"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mostrarDescCurso" />
+
+    <TextView
+        android:id="@+id/txtPrecioCurso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/precio_del_curso"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPlazasDisp" />
+
+    <TextView
+        android:id="@+id/mostrarNombreCurso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="70dp"
+        app:layout_constraintStart_toEndOf="@+id/txtNombreCurso"
+        app:layout_constraintTop_toBottomOf="@+id/infCurso" />
+
+    <TextView
+        android:id="@+id/mostrarHoras"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toEndOf="@+id/txtHoras"
+        app:layout_constraintTop_toBottomOf="@+id/mostrarNombreCurso" />
+
+    <TextView
+        android:id="@+id/mostrarFechaInicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="69dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toEndOf="@+id/txtFechaInicio"
+        app:layout_constraintTop_toBottomOf="@+id/mostrarHoras" />
+
+    <TextView
+        android:id="@+id/mostrarDescCurso"
+        android:layout_width="352dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtDescCurso" />
+
+    <TextView
+        android:id="@+id/mostrarPlazas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="46dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toEndOf="@+id/txtPlazasDisp"
+        app:layout_constraintTop_toBottomOf="@+id/mostrarDescCurso" />
+
+    <TextView
+        android:id="@+id/mostrarPrecio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="61dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toEndOf="@+id/txtPrecioCurso"
+        app:layout_constraintTop_toBottomOf="@+id/mostrarPlazas" />
+
+    <Button
+        android:id="@+id/btnComprarCurso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/button_rounded"
+        android:text="@string/comprar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPrecioCurso" />
+
+    <Button
+        android:id="@+id/btnVolver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/button_rounded"
+        android:text="@string/volver_atras"
+        app:layout_constraintStart_toEndOf="@+id/btnComprarCurso"
+        app:layout_constraintTop_toBottomOf="@+id/mostrarPrecio" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
