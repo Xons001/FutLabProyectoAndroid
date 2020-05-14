@@ -139,7 +139,6 @@ public class InfDisponibles extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            new getMaster().cancel(true);
         }
     }
 
@@ -210,7 +209,6 @@ public class InfDisponibles extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            new getGrado().cancel(true);
         }
     }
 
