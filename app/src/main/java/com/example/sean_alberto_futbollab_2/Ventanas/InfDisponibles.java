@@ -7,13 +7,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.sean_alberto_futbollab_2.Adapter.CustomAdapter;
-import com.example.sean_alberto_futbollab_2.Objetos.Cursos;
 import com.example.sean_alberto_futbollab_2.Objetos.Grado;
 import com.example.sean_alberto_futbollab_2.Objetos.Master;
 import com.example.sean_alberto_futbollab_2.R;
@@ -23,6 +20,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -31,14 +29,15 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 import static com.example.sean_alberto_futbollab_2.Ventanas.CursosDisponibles.cursoClickado;
+import static com.example.sean_alberto_futbollab_2.Ventanas.Login.clienteLogin;
 
 public class InfDisponibles extends AppCompatActivity {
 
     private String TAG = InfDisponibles.class.getSimpleName();
 
-    boolean tipoCurso = false;
     TextView mostrarNombre, mostrarHoras, mostrarFecha, mostrarDescripcion, mostrarPlazas, mostrarPrecio;
     Button btnComprar, btnVolver;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +66,13 @@ public class InfDisponibles extends AppCompatActivity {
         } else {
             Log.e(TAG, "No ha entrado en ninguno");
         }
+
+        btnComprar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new insertarInscripcion().execute();
+            }
+        });
 
         btnVolver.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -223,4 +229,50 @@ public class InfDisponibles extends AppCompatActivity {
         }
     }
 
+    private class insertarInscripcion extends AsyncTask<Void, Void, Void> {
+        boolean insertado = false;
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try {
+                URL url = new URL("https://futlab-credito-sintesis.herokuapp.com/inscripcion");
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+                conn.setRequestProperty("Accept", "application/json");
+                conn.setDoOutput(true);
+                conn.setDoInput(true);
+
+                JSONObject jsonParam = new JSONObject();
+                jsonParam.put("curso_id", Integer.parseInt(cursoClickado.getCurso_id()));
+                jsonParam.put("cliente_id", clienteLogin.getCliente_id());
+
+                Log.i("JSON", jsonParam.toString());
+                DataOutputStream os = new DataOutputStream(conn.getOutputStream());
+                os.writeBytes(jsonParam.toString());
+
+                os.flush();
+                os.close();
+
+                insertado = true;
+
+                conn.disconnect();
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(InfDisponibles.this, "El cliente no ha podido comprar el curso!", Toast.LENGTH_SHORT).show();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            if(insertado == true){
+                Toast.makeText(InfDisponibles.this, "El cliente ha comprado el curso", Toast.LENGTH_SHORT).show();
+                Intent volverDisponibles = new Intent(getApplicationContext(), CursosDisponibles.class);
+                startActivity(volverDisponibles);
+            } else {
+                Toast.makeText(InfDisponibles.this, "El cliente no ha podido comprar el curso", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 }

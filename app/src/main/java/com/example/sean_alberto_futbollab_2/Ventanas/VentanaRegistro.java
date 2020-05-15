@@ -92,7 +92,6 @@ public class VentanaRegistro extends AppCompatActivity {
                 Log.i("MSG supremo", conn.getResponseMessage());
 
                 insertado = true;
-                //Toast.makeText(VentanaRegistro.this, "Cliente registrado", Toast.LENGTH_SHORT).show();
 
                 conn.disconnect();
             } catch (Exception e) {
