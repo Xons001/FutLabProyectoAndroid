@@ -253,6 +253,9 @@ public class InfDisponibles extends AppCompatActivity {
                 os.flush();
                 os.close();
 
+                Log.i("STATUS prueba", String.valueOf(conn.getResponseCode()));
+                Log.i("MSG supremo", conn.getResponseMessage());
+
                 insertado = true;
 
                 conn.disconnect();
