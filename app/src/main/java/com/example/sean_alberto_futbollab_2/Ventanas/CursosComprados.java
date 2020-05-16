@@ -1,6 +1,8 @@
 package com.example.sean_alberto_futbollab_2.Ventanas;
 
-import android.app.Activity;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,9 +12,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
-import com.example.sean_alberto_futbollab_2.Adapter.CustomAdapter;
+import com.example.sean_alberto_futbollab_2.Adapter.CustomAdapterComprados;
 import com.example.sean_alberto_futbollab_2.Objetos.Cursos;
 import com.example.sean_alberto_futbollab_2.R;
 
@@ -26,59 +26,62 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class CursosDisponibles extends Activity {
+import static com.example.sean_alberto_futbollab_2.Ventanas.Login.clienteLogin;
 
-    private String TAG = CursosDisponibles.class.getSimpleName();
+public class CursosComprados extends AppCompatActivity {
 
-    ListView listView;
-    ArrayList<Cursos> arrayList;
-    SwipeRefreshLayout swipeRefresh;
-    Button volverMenu;
+    ListView listViewComprados;
+    ArrayList<Cursos> arrayListComprados;
+    SwipeRefreshLayout swipeRefreshComprados;
+    Button volverMenuComprados;
 
     static Cursos cursoClickado;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.cursos_disponibles);
+        setContentView(R.layout.cursos_comprados);
 
-        swipeRefresh = findViewById(R.id.swipeRefresh);
-        listView = findViewById(R.id.listaDisponibles);
-        volverMenu = findViewById(R.id.btnVolverMenu);
+        swipeRefreshComprados = findViewById(R.id.swipeRefreshComprados);
+        listViewComprados = findViewById(R.id.listaComprados);
+        volverMenuComprados = findViewById(R.id.btnVolverMenuComprados);
 
-        arrayList = new ArrayList<>();
+        arrayListComprados = new ArrayList<>();
 
-        new getCursos().execute();
+        new getCursosComprados().execute();
 
-        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        swipeRefreshComprados.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                new getCursos().execute();
+                new getCursosComprados().execute();
             }
         });
 
-        volverMenu.setOnClickListener(new View.OnClickListener() {
+
+        volverMenuComprados.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentMenu = new Intent(getApplicationContext(), VentanaCliente.class);
-                startActivity(intentMenu);
+                Intent intentMenuComprados = new Intent(getApplicationContext(), VentanaCliente.class);
+                startActivity(intentMenuComprados);
             }
         });
     }
 
-    public class getCursos extends AsyncTask<String, String, String> {
+    public class getCursosComprados extends AsyncTask<String, String, String> {
 
         @Override
         public void onPreExecute() {
             super .onPreExecute();
-            swipeRefresh.setRefreshing(true);
+            swipeRefreshComprados.setRefreshing(true);
         }
 
         @Override
         protected String doInBackground(String... params) {
-            arrayList.clear();
+            arrayListComprados.clear();
             String result = null;
             try {
-                URL url = new URL("https://futlab-credito-sintesis.herokuapp.com/cursos");
+                URL url = new URL("https://futlab-credito-sintesis.herokuapp.com/inscripcioncliente/" + clienteLogin.getCliente_id());
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.connect();
 
@@ -105,7 +108,7 @@ public class CursosDisponibles extends Activity {
         @Override
         public void onPostExecute(String s) {
             super .onPostExecute(s);
-            swipeRefresh.setRefreshing(false);
+            swipeRefreshComprados.setRefreshing(false);
             try {
                 JSONObject object = new JSONObject(s);
                 JSONArray array = object.getJSONArray("cursos");
@@ -126,25 +129,25 @@ public class CursosDisponibles extends Activity {
                     curso.setPlazas(plazas);
                     curso.setGrado_id(grado_id);
                     curso.setMaster_id(master_id);
-                    arrayList.add(curso);
+                    arrayListComprados.add(curso);
 
                 }
 
-            } catch (JSONException  e) {
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
 
-            CustomAdapter adapter = new CustomAdapter(CursosDisponibles.this, arrayList);
-            listView.setAdapter(adapter);
+            CustomAdapterComprados adapter = new CustomAdapterComprados(CursosComprados.this, arrayListComprados);
+            listViewComprados.setAdapter(adapter);
 
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            listViewComprados.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    Toast.makeText(CursosDisponibles.this, "Entrando en el curso ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CursosComprados.this, "Entrando en el curso ", Toast.LENGTH_SHORT).show();
                     cursoClickado = new Cursos();
-                    cursoClickado = arrayList.get(i);
-                    Intent ventanaInfo = new Intent(getApplicationContext(), InfDisponibles.class);
-                    startActivity(ventanaInfo);
+                    cursoClickado = arrayListComprados.get(i);
+                    Intent ventanaAsignaturas = new Intent(getApplicationContext(), TitulosAsignaturas.class);
+                    startActivity(ventanaAsignaturas);
                 }
             });
 

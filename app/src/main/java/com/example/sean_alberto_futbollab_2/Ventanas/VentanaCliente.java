@@ -46,6 +46,14 @@ public class VentanaCliente extends AppCompatActivity {
                 startActivity(ventanaDisponibles);
             }
         });
+
+        btnComprados.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent ventanaComprados = new Intent(getApplicationContext(), CursosComprados.class);
+                startActivity(ventanaComprados);
+            }
+        });
     }
 
 }

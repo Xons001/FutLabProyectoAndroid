@@ -70,7 +70,9 @@ public class InfDisponibles extends AppCompatActivity {
         btnComprar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new insertarInscripcion().execute();
+                if(Integer.parseInt(cursoClickado.getPlazas()) > 0) {
+                    new insertarInscripcion().execute();
+                }
             }
         });
 
