@@ -46,5 +46,6 @@ public class CustomAdapterComprados extends BaseAdapter {
         nombre = convertView.findViewById(R.id.nombreComprado);
         nombre.setText(arrayListComprados.get(position).getNombre());
 
-        return convertView;    }
+        return convertView;
+    }
 }

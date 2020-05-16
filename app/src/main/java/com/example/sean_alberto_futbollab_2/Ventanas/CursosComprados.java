@@ -35,7 +35,7 @@ public class CursosComprados extends AppCompatActivity {
     SwipeRefreshLayout swipeRefreshComprados;
     Button volverMenuComprados;
 
-    static Cursos cursoClickado;
+    static Cursos cursoClickadoComprado;
 
 
     @Override
@@ -144,8 +144,8 @@ public class CursosComprados extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     Toast.makeText(CursosComprados.this, "Entrando en el curso ", Toast.LENGTH_SHORT).show();
-                    cursoClickado = new Cursos();
-                    cursoClickado = arrayListComprados.get(i);
+                    cursoClickadoComprado = new Cursos();
+                    cursoClickadoComprado = arrayListComprados.get(i);
                     Intent ventanaAsignaturas = new Intent(getApplicationContext(), TitulosAsignaturas.class);
                     startActivity(ventanaAsignaturas);
                 }
