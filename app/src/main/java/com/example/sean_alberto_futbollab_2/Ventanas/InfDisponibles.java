@@ -72,6 +72,10 @@ public class InfDisponibles extends AppCompatActivity {
             public void onClick(View view) {
                 if(Integer.parseInt(cursoClickado.getPlazas()) > 0) {
                     new insertarInscripcion().execute();
+                    new updatePlazas().execute();
+                } else {
+                    Toast.makeText(InfDisponibles.this, "No hay plazas suficientes", Toast.LENGTH_SHORT).show();
+
                 }
             }
         });
@@ -279,5 +283,42 @@ public class InfDisponibles extends AppCompatActivity {
                 Toast.makeText(InfDisponibles.this, "El cliente no ha podido comprar el curso", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private class updatePlazas extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try {
+                URL url = new URL("https://futlab-credito-sintesis.herokuapp.com/restarplazas/" + Integer.parseInt(cursoClickado.getCurso_id()));
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("PUT");
+                conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+                conn.setRequestProperty("Accept", "application/json");
+                conn.setDoOutput(true);
+                conn.setDoInput(true);
+
+                JSONObject jsonParam = new JSONObject();
+                //jsonParam.put("curso_id", Integer.parseInt(cursoClickado.getCurso_id()));
+                jsonParam.put("plazas", Integer.parseInt(cursoClickado.getPlazas()));
+
+                Log.i("JSON", jsonParam.toString());
+                DataOutputStream os = new DataOutputStream(conn.getOutputStream());
+                os.writeBytes(jsonParam.toString());
+
+                os.flush();
+                os.close();
+
+                Log.i("STATUS prueba", String.valueOf(conn.getResponseCode()));
+                Log.i("MSG supremo", conn.getResponseMessage());
+
+                conn.disconnect();
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(InfDisponibles.this, "El cliente no ha podido comprar el curso porque no se ha podido hacer el update!", Toast.LENGTH_SHORT).show();
+            }
+
+            return null;
+        }
+
     }
 }
