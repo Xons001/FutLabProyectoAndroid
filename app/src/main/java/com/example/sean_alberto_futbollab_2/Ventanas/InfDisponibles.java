@@ -72,10 +72,8 @@ public class InfDisponibles extends AppCompatActivity {
             public void onClick(View view) {
                 if(Integer.parseInt(cursoClickado.getPlazas()) > 0) {
                     new insertarInscripcion().execute();
-                    new updatePlazas().execute();
                 } else {
                     Toast.makeText(InfDisponibles.this, "No hay plazas suficientes", Toast.LENGTH_SHORT).show();
-
                 }
             }
         });
@@ -235,10 +233,12 @@ public class InfDisponibles extends AppCompatActivity {
         }
     }
 
-    private class insertarInscripcion extends AsyncTask<Void, Void, Void> {
+    private class insertarInscripcion extends AsyncTask<Void, Void, String> {
         boolean insertado = false;
+
         @Override
-        protected Void doInBackground(Void... voids) {
+        protected String doInBackground(Void... voids) {
+            String result = null;
             try {
                 URL url = new URL("https://futlab-credito-sintesis.herokuapp.com/inscripcion");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -257,10 +257,20 @@ public class InfDisponibles extends AppCompatActivity {
                 os.writeBytes(jsonParam.toString());
 
                 os.flush();
-                os.close();
+                if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                    InputStreamReader inputStreamReader = new InputStreamReader(conn.getInputStream());
+                    BufferedReader reader = new BufferedReader(inputStreamReader);
+                    StringBuilder stringBuilder = new StringBuilder();
+                    String temp;
 
-                Log.i("STATUS prueba", String.valueOf(conn.getResponseCode()));
-                Log.i("MSG supremo", conn.getResponseMessage());
+                    while ((temp = reader.readLine()) != null) {
+                        stringBuilder.append(temp);
+                    }
+                    result = stringBuilder.toString();
+                }else  {
+                    result = "error";
+                }
+                os.close();
 
                 insertado = true;
 
@@ -270,18 +280,31 @@ public class InfDisponibles extends AppCompatActivity {
                 Toast.makeText(InfDisponibles.this, "El cliente no ha podido comprar el curso!", Toast.LENGTH_SHORT).show();
             }
 
-            return null;
+            return result;
         }
 
         @Override
-        protected void onPostExecute(Void aVoid) {
-            if(insertado == true){
-                Toast.makeText(InfDisponibles.this, "El cliente ha comprado el curso", Toast.LENGTH_SHORT).show();
-                Intent volverDisponibles = new Intent(getApplicationContext(), CursosDisponibles.class);
-                startActivity(volverDisponibles);
-            } else {
-                Toast.makeText(InfDisponibles.this, "El cliente no ha podido comprar el curso", Toast.LENGTH_SHORT).show();
+        protected void onPostExecute(String s) {
+            JSONObject response = null;
+            try {
+                response = new JSONObject(s);
+                String cod = response.getString("codigo");
+                String texto = response.getString("texto");
+                Log.i("Codigo", response.getString("codigo"));
+                Log.i("Texto", response.getString("texto"));
+
+                if (cod.equals("1")){
+                    Toast.makeText(InfDisponibles.this, texto, Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(InfDisponibles.this, "El cliente ha comprado el curso", Toast.LENGTH_SHORT).show();
+                    new updatePlazas().execute();
+                    Intent volverDisponibles = new Intent(getApplicationContext(), CursosDisponibles.class);
+                    startActivity(volverDisponibles);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
+
         }
     }
 
