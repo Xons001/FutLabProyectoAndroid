@@ -15,6 +15,8 @@
         android:layout_marginTop="60dp"
         android:layout_marginEnd="100dp"
         android:text="@string/informacion_curso"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -85,6 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginTop="70dp"
+        android:textColor="@color/colorBlack"
         app:layout_constraintStart_toEndOf="@+id/txtNombreCurso"
         app:layout_constraintTop_toBottomOf="@+id/infCurso" />
 
@@ -94,6 +97,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="75dp"
         android:layout_marginTop="30dp"
+        android:textColor="@color/colorBlack"
         app:layout_constraintStart_toEndOf="@+id/txtHoras"
         app:layout_constraintTop_toBottomOf="@+id/mostrarNombreCurso" />
 
@@ -103,15 +107,17 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="69dp"
         android:layout_marginTop="30dp"
+        android:textColor="@color/colorBlack"
         app:layout_constraintStart_toEndOf="@+id/txtFechaInicio"
         app:layout_constraintTop_toBottomOf="@+id/mostrarHoras" />
 
     <TextView
         android:id="@+id/mostrarDescCurso"
-        android:layout_width="352dp"
-        android:layout_height="80dp"
+        android:layout_width="349dp"
+        android:layout_height="87dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="32dp"
+        android:textColor="@color/colorBlack"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtDescCurso" />
 
@@ -121,6 +127,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="46dp"
         android:layout_marginTop="40dp"
+        android:textColor="@color/colorBlack"
         app:layout_constraintStart_toEndOf="@+id/txtPlazasDisp"
         app:layout_constraintTop_toBottomOf="@+id/mostrarDescCurso" />
 
@@ -130,6 +137,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="61dp"
         android:layout_marginTop="30dp"
+        android:textColor="@color/colorBlack"
         app:layout_constraintStart_toEndOf="@+id/txtPrecioCurso"
         app:layout_constraintTop_toBottomOf="@+id/mostrarPlazas" />
 

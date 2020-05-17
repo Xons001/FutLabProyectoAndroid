@@ -9,49 +9,58 @@
     tools:context=".Ventanas.VentanaCliente">
 
     <Button
+        android:id="@+id/btnCursosDisponibles"
+        android:layout_width="94dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="55dp"
+        android:layout_marginEnd="47dp"
+        android:background="@drawable/button_rounded"
+        android:text="@string/cursos_disponibles"
+        app:layout_constraintEnd_toStartOf="@+id/btnCursosComprados"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/carouselView" />
+
+    <Button
         android:id="@+id/btnCursosComprados"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="47dp"
-        android:layout_marginEnd="100dp"
+        android:layout_width="111dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="55dp"
+        android:layout_marginEnd="80dp"
         android:background="@drawable/button_rounded"
         android:text="@string/cursos_comprados"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCursosDisponibles" />
-
-    <Button
-        android:id="@+id/btnCursosDisponibles"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="100dp"
-        android:background="@drawable/button_rounded"
-        android:text="@string/cursos_disponibles"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/carouselView" />
 
     <com.synnapps.carouselview.CarouselView
         android:id="@+id/carouselView"
-        android:layout_width="371dp"
-        android:layout_height="277dp"
+        android:layout_width="358dp"
+        android:layout_height="160dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="20dp"
         app:fillColor="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCursosComprados"
+        app:layout_constraintTop_toTopOf="parent"
         app:pageColor="@color/colorWhite"
         app:radius="6dp"
         app:slideInterval="3000"
         app:strokeColor="@color/colorGrey"
         app:strokeWidth="1dp" />
+
+    <Button
+        android:id="@+id/btnCerrarSession"
+        android:layout_width="115dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="96dp"
+        android:layout_marginEnd="100dp"
+        android:background="@drawable/button_rounded"
+        android:text="@string/cerrar_sesion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCursosDisponibles" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

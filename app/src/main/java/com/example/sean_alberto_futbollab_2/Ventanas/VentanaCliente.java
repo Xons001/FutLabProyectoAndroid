@@ -14,7 +14,7 @@ import com.synnapps.carouselview.ImageListener;
 
 public class VentanaCliente extends AppCompatActivity {
 
-    Button btnDisponibles, btnComprados;
+    Button btnDisponibles, btnComprados, btnCerrarSession;
 
     private CarouselView carouselView;
 
@@ -38,6 +38,7 @@ public class VentanaCliente extends AppCompatActivity {
 
         btnDisponibles = findViewById(R.id.btnCursosDisponibles);
         btnComprados = findViewById(R.id.btnCursosComprados);
+        btnCerrarSession = findViewById(R.id.btnCerrarSession);
 
         btnDisponibles.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +53,14 @@ public class VentanaCliente extends AppCompatActivity {
             public void onClick(View view) {
                 Intent ventanaComprados = new Intent(getApplicationContext(), CursosComprados.class);
                 startActivity(ventanaComprados);
+            }
+        });
+
+        btnCerrarSession.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent cerrarSesion = new Intent(getApplicationContext(), Login.class);
+                startActivity(cerrarSesion);
             }
         });
     }

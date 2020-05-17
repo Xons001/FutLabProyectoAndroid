@@ -5,8 +5,8 @@
     <string name="registrarse">Registrarse</string>
     <string name="nombre_cliente">Introduce tu nombre...</string>
     <string name="apellidos_cliente">Introduce tus apellidos...</string>
-    <string name="mail_cliente">Introduce tu email ...</string>
-    <string name="cliente_password">introduce un password  ...</string>
+    <string name="mail_cliente">Introduce tu email...</string>
+    <string name="cliente_password">Introduce un password ...</string>
     <string name="confirmar_registro">Confirmar Registro</string>
     <string name="volver_atras">Volver</string>
     <string name="correo_electronico">Correo electronico</string>
@@ -36,4 +36,6 @@
     <string name="plazas_disponibles">Plazas Disponibles</string>
     <string name="precio_del_curso">Precio del Curso</string>
     <string name="comprar">Comprar</string>
+    <string name="cerrar_sesion">Cerrar Sesion</string>
+    <string name="asignaturas_del_curso">Asignaturas del Curso</string>
 </resources>

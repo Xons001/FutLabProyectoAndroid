@@ -9,11 +9,11 @@
 
     <Button
         android:id="@+id/boton_confirmar_registro"
-        android:layout_width="330dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="200dp"
+        android:layout_width="269dp"
+        android:layout_height="73dp"
+        android:layout_marginStart="150dp"
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="200dp"
+        android:layout_marginEnd="150dp"
         android:background="@drawable/button_rounded"
         android:text="@string/confirmar_registro"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,8 +22,8 @@
 
     <Button
         android:id="@+id/boton_volver_atras"
-        android:layout_width="330dp"
-        android:layout_height="75dp"
+        android:layout_width="276dp"
+        android:layout_height="70dp"
         android:layout_marginStart="100dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="100dp"
@@ -36,8 +36,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="320dp"
+        android:layout_height="84dp"
         android:layout_marginStart="100dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="100dp"
@@ -104,7 +104,7 @@
         android:hint="@string/cliente_password"
         android:inputType="textPassword"
         app:layout_constraintEnd_toStartOf="@+id/boton_confirmar_registro"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.002"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mail_registro" />
 
