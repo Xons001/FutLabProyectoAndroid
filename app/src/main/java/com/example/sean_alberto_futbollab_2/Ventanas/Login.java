@@ -46,6 +46,7 @@ public class Login extends AppCompatActivity {
                 String mail = txtCorreo.getText().toString();
                 String pass = txtPassword.getText().toString();
                 URL_login = getURL_login(mail, pass);
+                Toast.makeText(Login.this, "Cargando...", Toast.LENGTH_SHORT).show();
                 new IniciarSesion().execute();
             }
         });
